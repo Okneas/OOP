@@ -1,0 +1,11 @@
+C:\Users\Андрей\source\repos\Задание 1 прак 4\Задание 1 прак 4\bin\Debug\netcoreapp2.1\Задание 1 прак 4.deps.json
+C:\Users\Андрей\source\repos\Задание 1 прак 4\Задание 1 прак 4\bin\Debug\netcoreapp2.1\Задание 1 прак 4.runtimeconfig.json
+C:\Users\Андрей\source\repos\Задание 1 прак 4\Задание 1 прак 4\bin\Debug\netcoreapp2.1\Задание 1 прак 4.runtimeconfig.dev.json
+C:\Users\Андрей\source\repos\Задание 1 прак 4\Задание 1 прак 4\bin\Debug\netcoreapp2.1\Задание 1 прак 4.dll
+C:\Users\Андрей\source\repos\Задание 1 прак 4\Задание 1 прак 4\bin\Debug\netcoreapp2.1\Задание 1 прак 4.pdb
+C:\Users\Андрей\source\repos\Задание 1 прак 4\Задание 1 прак 4\obj\Debug\netcoreapp2.1\Задание 1 прак 4.csprojAssemblyReference.cache
+C:\Users\Андрей\source\repos\Задание 1 прак 4\Задание 1 прак 4\obj\Debug\netcoreapp2.1\Задание 1 прак 4.csproj.CoreCompileInputs.cache
+C:\Users\Андрей\source\repos\Задание 1 прак 4\Задание 1 прак 4\obj\Debug\netcoreapp2.1\Задание 1 прак 4.AssemblyInfoInputs.cache
+C:\Users\Андрей\source\repos\Задание 1 прак 4\Задание 1 прак 4\obj\Debug\netcoreapp2.1\Задание 1 прак 4.AssemblyInfo.cs
+C:\Users\Андрей\source\repos\Задание 1 прак 4\Задание 1 прак 4\obj\Debug\netcoreapp2.1\Задание 1 прак 4.dll
+C:\Users\Андрей\source\repos\Задание 1 прак 4\Задание 1 прак 4\obj\Debug\netcoreapp2.1\Задание 1 прак 4.pdb

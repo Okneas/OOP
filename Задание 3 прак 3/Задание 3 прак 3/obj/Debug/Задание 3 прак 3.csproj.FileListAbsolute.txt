@@ -1,0 +1,10 @@
+C:\Users\Андрей\source\repos\Задание 3 прак 3\Задание 3 прак 3\obj\Debug\Задание 3 прак 3.csprojAssemblyReference.cache
+C:\Users\Андрей\source\repos\Задание 3 прак 3\Задание 3 прак 3\obj\Debug\Задание_3_прак_3.Form1.resources
+C:\Users\Андрей\source\repos\Задание 3 прак 3\Задание 3 прак 3\obj\Debug\Задание_3_прак_3.Properties.Resources.resources
+C:\Users\Андрей\source\repos\Задание 3 прак 3\Задание 3 прак 3\obj\Debug\Задание 3 прак 3.csproj.GenerateResource.cache
+C:\Users\Андрей\source\repos\Задание 3 прак 3\Задание 3 прак 3\obj\Debug\Задание 3 прак 3.csproj.CoreCompileInputs.cache
+C:\Users\Андрей\source\repos\Задание 3 прак 3\Задание 3 прак 3\bin\Debug\Задание 3 прак 3.exe.config
+C:\Users\Андрей\source\repos\Задание 3 прак 3\Задание 3 прак 3\bin\Debug\Задание 3 прак 3.exe
+C:\Users\Андрей\source\repos\Задание 3 прак 3\Задание 3 прак 3\bin\Debug\Задание 3 прак 3.pdb
+C:\Users\Андрей\source\repos\Задание 3 прак 3\Задание 3 прак 3\obj\Debug\Задание 3 прак 3.exe
+C:\Users\Андрей\source\repos\Задание 3 прак 3\Задание 3 прак 3\obj\Debug\Задание 3 прак 3.pdb

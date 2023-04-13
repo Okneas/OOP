@@ -1,0 +1,65 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>Задание 2 прак 1</name>
+    </assembly>
+    <members>
+        <member name="T:Задание_2_прак_1.Form1">
+            <summary>
+            WPF application to read and format data
+            </summary>
+        </member>
+        <member name="M:Задание_2_прак_1.Form1.#ctor">
+            <summary>
+            Constructor for MainWindow
+            </summary>
+        </member>
+        <member name="M:Задание_2_прак_1.Form1.Button1_Click(System.Object,System.EventArgs)">
+            <summary>
+            Read a line of data entered by the user.
+            Format the data and display the results in the 
+            formattedText TextBlock control.
+            </summary>
+            <param name="sender"></param>
+            <param name="e"></param>    
+        </member>
+        <member name="F:Задание_2_прак_1.Form1.components">
+            <summary>
+            Обязательная переменная конструктора.
+            </summary>
+        </member>
+        <member name="M:Задание_2_прак_1.Form1.Dispose(System.Boolean)">
+            <summary>
+            Освободить все используемые ресурсы.
+            </summary>
+            <param name="disposing">истинно, если управляемый ресурс должен быть удален; иначе ложно.</param>
+        </member>
+        <member name="M:Задание_2_прак_1.Form1.InitializeComponent">
+            <summary>
+            Требуемый метод для поддержки конструктора — не изменяйте 
+            содержимое этого метода с помощью редактора кода.
+            </summary>
+        </member>
+        <member name="M:Задание_2_прак_1.Program.Main">
+            <summary>
+            Главная точка входа для приложения.
+            </summary>
+        </member>
+        <member name="T:Задание_2_прак_1.Properties.Resources">
+            <summary>
+              Класс ресурсов со строгим типом для поиска локализованных строк и пр.
+            </summary>
+        </member>
+        <member name="P:Задание_2_прак_1.Properties.Resources.ResourceManager">
+            <summary>
+              Возврат кэшированного экземпляра ResourceManager, используемого этим классом.
+            </summary>
+        </member>
+        <member name="P:Задание_2_прак_1.Properties.Resources.Culture">
+            <summary>
+              Переопределяет свойство CurrentUICulture текущего потока для всех
+              подстановки ресурсов с помощью этого класса ресурсов со строгим типом.
+            </summary>
+        </member>
+    </members>
+</doc>

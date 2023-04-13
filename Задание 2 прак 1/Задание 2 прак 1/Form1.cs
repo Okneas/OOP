@@ -10,11 +10,18 @@ using System.Windows.Forms;
 
 namespace Задание_2_прак_1
 {
+    /// <summary>
+    /// WPF application to read and format data
+    /// </summary>
     public partial class Form1 : Form
     {
         int n = 0;
         decimal guess, true_guess, izm, pog;
         double d;
+
+        /// <summary>
+        /// Constructor for MainWindow
+        /// </summary>
         public Form1()
         {
             InitializeComponent();
@@ -24,7 +31,13 @@ namespace Задание_2_прак_1
         {
 
         }
-
+        /// <summary>
+        /// Read a line of data entered by the user.
+        /// Format the data and display the results in the 
+        /// formattedText TextBlock control.
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>    
         private void Button1_Click(object sender, EventArgs e)
         {
             if ((!(Double.TryParse(textBox1.Text, out d))))
