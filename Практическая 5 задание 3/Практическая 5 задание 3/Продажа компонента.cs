@@ -36,8 +36,14 @@ namespace Практическая_5_задание_3
             {
                 type = ComponentType.Cooler;
             }
-            Form1.shop.SellComponent(type, textBox1.Text);
+            Form1.shop.SellComponent(type, textBox1.Text, dateTimePicker1.Value);
             Close();
+        }
+
+        private void Продажа_компонента_Load(object sender, EventArgs e)
+        {
+            dateTimePicker1.Format = DateTimePickerFormat.Custom;
+            dateTimePicker1.CustomFormat = "MM/dd/yyyy hh:mm:ss";
         }
     }
 }

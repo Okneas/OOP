@@ -59,13 +59,21 @@
     <Compile Include="IProcessor.cs" />
     <Compile Include="IShop.cs" />
     <Compile Include="IVideoCard.cs" />
+    <Compile Include="Observer.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Strategy.cs" />
     <Compile Include="Добавление компонента.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="Добавление компонента.Designer.cs">
       <DependentUpon>Добавление компонента.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Доставки.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Доставки.Designer.cs">
+      <DependentUpon>Доставки.cs</DependentUpon>
     </Compile>
     <Compile Include="Информация об компонентах.cs">
       <SubType>Form</SubType>
@@ -99,6 +107,9 @@
     </Compile>
     <EmbeddedResource Include="Добавление компонента.resx">
       <DependentUpon>Добавление компонента.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Доставки.resx">
+      <DependentUpon>Доставки.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Информация об компонентах.resx">
       <DependentUpon>Информация об компонентах.cs</DependentUpon>

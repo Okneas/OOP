@@ -6,6 +6,12 @@ using System.Threading.Tasks;
 
 namespace Практическая_5_задание_3
 {
+    public enum DeliveryStatus
+    {
+        OnStorage,
+        InTransit,
+        Delivered
+    }
     public enum ComponentType
     {
         Processor,
@@ -15,16 +21,33 @@ namespace Практическая_5_задание_3
     }
     public abstract class Component
     {
+        public TimeSpan dtDelivery; 
+        public DeliveryStatus dl = DeliveryStatus.OnStorage;
         public string Name;
         public string Manufacturer;
         public decimal Price;
         public ComponentType Type;
+        public string region;
+        public double discount;
 
-        public void SetNameManPrice(string name, string man, decimal price)
+        public void SetData(string name, string man, decimal price, string reg, double dis)
         {
+            if(reg == "")
+            {
+                this.region = "Russia";
+            }
+            else
+            {
+                this.region = reg;
+            }
+            this.discount = dis;
             this.Name = name;
             this.Manufacturer = man;
             this.Price = price;
+        }
+        public void SetDateOfDelivery(TimeSpan dt)
+        {
+            this.dtDelivery = dt;
         }
         public string GetTypeString()
         {
@@ -38,6 +61,19 @@ namespace Практическая_5_задание_3
                     return "Processor";
                 case (ComponentType.VideoCard):
                     return "VideoCard";
+            }
+            return "";
+        }
+        public string GetDeliveryStatusString()
+        {
+            switch (dl)
+            {
+                case (DeliveryStatus.OnStorage):
+                    return "На складе";
+                case (DeliveryStatus.InTransit):
+                    return "В пути";
+                case (DeliveryStatus.Delivered):
+                    return "Доставлено";
             }
             return "";
         }

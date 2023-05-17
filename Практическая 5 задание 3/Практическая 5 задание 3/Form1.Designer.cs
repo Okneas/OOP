@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
             this.label1 = new System.Windows.Forms.Label();
             this.button1 = new System.Windows.Forms.Button();
             this.button2 = new System.Windows.Forms.Button();
@@ -38,8 +39,9 @@
             this.button7 = new System.Windows.Forms.Button();
             this.button8 = new System.Windows.Forms.Button();
             this.label2 = new System.Windows.Forms.Label();
-            this.label3 = new System.Windows.Forms.Label();
             this.label4 = new System.Windows.Forms.Label();
+            this.button9 = new System.Windows.Forms.Button();
+            this.timer1 = new System.Windows.Forms.Timer(this.components);
             this.SuspendLayout();
             // 
             // label1
@@ -140,16 +142,6 @@
             this.label2.Text = "Здесь могла бы быть ваша \r\nреклама";
             this.label2.TextAlign = System.Drawing.ContentAlignment.TopCenter;
             // 
-            // label3
-            // 
-            this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(280, 256);
-            this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(225, 34);
-            this.label3.TabIndex = 10;
-            this.label3.Text = "Здесь тоже могла бы быть ваша \r\nреклама";
-            this.label3.TextAlign = System.Drawing.ContentAlignment.TopCenter;
-            // 
             // label4
             // 
             this.label4.AutoSize = true;
@@ -159,13 +151,28 @@
             this.label4.TabIndex = 11;
             this.label4.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
+            // button9
+            // 
+            this.button9.Location = new System.Drawing.Point(276, 224);
+            this.button9.Name = "button9";
+            this.button9.Size = new System.Drawing.Size(249, 66);
+            this.button9.TabIndex = 12;
+            this.button9.Text = "Информация о доставках";
+            this.button9.UseVisualStyleBackColor = true;
+            this.button9.Click += new System.EventHandler(this.Button9_Click);
+            // 
+            // timer1
+            // 
+            this.timer1.Interval = 250;
+            this.timer1.Tick += new System.EventHandler(this.Timer1_Tick);
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(800, 406);
+            this.Controls.Add(this.button9);
             this.Controls.Add(this.label4);
-            this.Controls.Add(this.label3);
             this.Controls.Add(this.label2);
             this.Controls.Add(this.button8);
             this.Controls.Add(this.button7);
@@ -178,6 +185,7 @@
             this.Controls.Add(this.label1);
             this.Name = "Form1";
             this.Text = "Form1";
+            this.Load += new System.EventHandler(this.Form1_Load);
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -195,8 +203,9 @@
         private System.Windows.Forms.Button button7;
         private System.Windows.Forms.Button button8;
         private System.Windows.Forms.Label label2;
-        private System.Windows.Forms.Label label3;
         private System.Windows.Forms.Label label4;
+        private System.Windows.Forms.Button button9;
+        private System.Windows.Forms.Timer timer1;
     }
 }
 

@@ -24,11 +24,23 @@ namespace Практическая_5_задание_3
 
         private void Чеки_Load(object sender, EventArgs e)
         {
+            SetAllChecks();
+            timer1.Start();
+        }
+
+        public void SetAllChecks()
+        {
             List<string> info = Form1.shop.GetAllChecks();
-            foreach(string i in info)
+            foreach (string i in info)
             {
                 richTextBox1.AppendText(i + Environment.NewLine);
             }
+        }
+
+        private void Timer1_Tick(object sender, EventArgs e)
+        {
+            richTextBox1.Clear();
+            SetAllChecks();
         }
     }
 }

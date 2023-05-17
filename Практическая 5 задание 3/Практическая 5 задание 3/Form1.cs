@@ -12,10 +12,12 @@ namespace Практическая_5_задание_3
 {
     public partial class Form1 : Form
     {
+        Доставки f6;
         Добавление_компонента f2;
         Информация_об_компонентах f3;
         Продажа_компонента f4;
         Чеки f5;
+        Observer observer = new Observer();
         public static Shop shop = new Shop("MyShop", "MyAddress");
         public Form1()
         {
@@ -70,6 +72,21 @@ namespace Практическая_5_задание_3
             label4.Text = saleMessage;
         }
 
+        private void Button9_Click(object sender, EventArgs e)
+        {
+            f6 = new Доставки();
+            f6.Show();
+        }
+
+        private void Timer1_Tick(object sender, EventArgs e)
+        {
+            observer.UpdateDeliveries();
+        }
+
+        private void Form1_Load(object sender, EventArgs e)
+        {
+            timer1.Start();
+        }
     }
 
     public class Processor : Component, IProcessor
@@ -124,7 +141,6 @@ namespace Практическая_5_задание_3
     {
         public string Name { get; set; }
         public decimal Price { get; set; }
-
         public Processor Processor { get; set; }
         public VideoCard VideoCard { get; set; }
         public Cooler Cooler { get; set; }
@@ -154,6 +170,7 @@ namespace Практическая_5_задание_3
         public event EventHandler<ComponentEventArgs> ComponentSold;
         public Shop(string name, string address)
         {
+            AllDeliveries = new List<Component>();
             AllComponents = new List<Component>();
             AllComputers = new List<Computer>();
             AllChecks = new List<string>();
@@ -161,6 +178,7 @@ namespace Практическая_5_задание_3
             Address = address;
         }
         public List<Component> AllComponents { get; set; }
+        public List<Component> AllDeliveries { get; set; }
         public List<Computer> AllComputers { get; set; }
         public List<string> AllChecks { get; set; }
         public string Name { get; set; }
@@ -178,7 +196,7 @@ namespace Практическая_5_задание_3
         {
             ComponentSold?.Invoke(this, e);
         }
-        public void SellComponent(ComponentType componentType, string name)
+        public void SellComponent(ComponentType componentType, string name, DateTime DateOfDelivery)
         {
             bool find = false;
             foreach(Component i in AllComponents)
@@ -191,23 +209,25 @@ namespace Практическая_5_задание_3
                     {
                         case (ComponentType.Cooler):
                             Cooler cooler = i as Cooler;
-                            AllChecks.Add($"Продано {dt}\nТип товара: Кулер\nНазвание: {cooler.Name} \nПроизводитель: {cooler.Manufacturer}\nСкорость винтов: {cooler.FanSpeed} \nЦена: {cooler.Price}\n");
+                            AllChecks.Add($"Продано {dt}\nТип товара: Кулер\nНазвание: {cooler.Name} \nПроизводитель: {cooler.Manufacturer}\nСкорость винтов: {cooler.FanSpeed}\nРегион продажи: {cooler.region}\nЦена: {cooler.Price}\nСтатус: {cooler.GetDeliveryStatusString()}");
                             break;
                         case (ComponentType.Motherboard):
                             Motherboard motherboard = i as Motherboard;
-                            AllChecks.Add($"Продано {dt}\nТип товара: Кулер\nНазвание: {motherboard.Name} \nПроизводитель: {motherboard.Manufacturer}\nЧипсет: {motherboard.Chipset}\nКол-во RAM-слотов: {motherboard.RAMSlots} \nЦена: {motherboard.Price}\n");
+                            AllChecks.Add($"Продано {dt}\nТип товара: Кулер\nНазвание: {motherboard.Name} \nПроизводитель: {motherboard.Manufacturer}\nЧипсет: {motherboard.Chipset}\nКол-во RAM-слотов: {motherboard.RAMSlots} \nРегион продажи: {motherboard.region}\nЦена: {motherboard.Price}\nСтатус: {motherboard.GetDeliveryStatusString()}");
                             break;
                         case (ComponentType.VideoCard):
                             VideoCard videoCard = i as VideoCard;
-                            AllChecks.Add($"Продано {dt}\nТип товара: Кулер\nНазвание: {videoCard.Name} \nПроизводитель: {videoCard.Manufacturer}\nЧастота: {videoCard.ClockSpeed}\nVRAM: {videoCard.VRAM} \nЦена: {videoCard.Price}\n");
+                            AllChecks.Add($"Продано {dt}\nТип товара: Кулер\nНазвание: {videoCard.Name} \nПроизводитель: {videoCard.Manufacturer}\nЧастота: {videoCard.ClockSpeed}\nVRAM: {videoCard.VRAM} \nРегион продажи: {videoCard.region}\nЦена: {videoCard.Price}\nСтатус: {videoCard.GetDeliveryStatusString()}");
                             break;
                         case (ComponentType.Processor):
                             Processor proc = i as Processor;
-                            AllChecks.Add($"Продано {dt} \nТип товара: Кулер\nНазвание: {proc.Name} \nПроизводитель: {proc.Manufacturer}\nЧастота: {proc.ClockSpeed}\nЯдер: {proc.Cores} \nКол-во потоков: {proc.Threads} \nЦена: {proc.Price}\n");
+                            AllChecks.Add($"Продано {dt} \nТип товара: Кулер\nНазвание: {proc.Name} \nПроизводитель: {proc.Manufacturer}\nЧастота: {proc.ClockSpeed}\nЯдер: {proc.Cores} \nКол-во потоков: {proc.Threads} \nРегион продажи: {proc.region}\nЦена: {proc.Price}\nСтатус: {proc.GetDeliveryStatusString()}");
                             break;
                     }
                     OnProductSold(new ComponentEventArgs(i));
-                    AllComponents.Remove(i);
+                    i.SetDateOfDelivery(DateOfDelivery - dt);
+                    i.dl = DeliveryStatus.InTransit;
+                    AllDeliveries.Add(i);
                     break;
                 }
             }
@@ -224,7 +244,6 @@ namespace Практическая_5_задание_3
                 {
                     DateTime dt = new DateTime();
                     AllChecks.Append($"Продано {dt.Date} в {dt.Hour}:{dt.Minute} \nТип товара: Компьютер \nНазвание: {i.Name} \nПроцессор: {i.Processor.Name} \nВидеокарта: {i.VideoCard.Name} \nКулер: {i.Cooler.Name} \nМатеринская плата: {i.Motherboard.Name} \nЦена: {i.Price} \n");
-                    AllComputers.Remove(i);
                     break;
                 }
             }
@@ -240,6 +259,10 @@ namespace Практическая_5_задание_3
         public List<string> GetAllChecks()
         {
             return AllChecks;
+        }
+        public List<Component> GetAllDeliveries()
+        {
+            return AllDeliveries;
         }
     }
 }
