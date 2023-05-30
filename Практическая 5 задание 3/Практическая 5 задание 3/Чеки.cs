@@ -30,10 +30,34 @@ namespace Практическая_5_задание_3
 
         public void SetAllChecks()
         {
-            List<string> info = Form1.shop.GetAllChecks();
-            foreach (string i in info)
+            List<Product> list = Form1.shop.GetAllSoldComponents();
+            foreach (Product i in list)
             {
-                richTextBox1.AppendText(i + Environment.NewLine);
+                string info = "";
+                switch (i.Type)
+                {
+                    case (ComponentType.Cooler):
+                        Cooler cooler = i as Cooler;
+                        info = $"Тип товара: Кулер\nНазвание: {cooler.Name} \nПроизводитель: {cooler.Manufacturer}\nСкорость винтов: {cooler.FanSpeed} \nРегион продажи: {cooler.region}\nЦена: {cooler.Price}\nСтатус:{cooler.GetDeliveryStatusString()}";
+                        break;
+                    case (ComponentType.Motherboard):
+                        Motherboard motherboard = i as Motherboard;
+                        info = $"Тип товара: Материнская плата\nНазвание: {motherboard.Name} \nПроизводитель: {motherboard.Manufacturer}\nЧипсет: {motherboard.Chipset}\nКол-во RAM-слотов: {motherboard.RAMSlots} \nРегион продажи: {motherboard.region}\nЦена: {motherboard.Price}\nСтатус:{motherboard.GetDeliveryStatusString()}";
+                        break;
+                    case (ComponentType.VideoCard):
+                        VideoCard videoCard = i as VideoCard;
+                        info = $"Тип товара: Видеокарта\nНазвание: {videoCard.Name} \nПроизводитель: {videoCard.Manufacturer}\nЧастота: {videoCard.ClockSpeed}\nVRAM: {videoCard.VRAM} \nРегион продажи: {videoCard.region}\nЦена: {videoCard.Price}\nСтатус:{videoCard.GetDeliveryStatusString()}";
+                        break;
+                    case (ComponentType.Processor):
+                        Processor proc = i as Processor;
+                        info = $"Тип товара: Процессор\nНазвание: {proc.Name} \nПроизводитель: {proc.Manufacturer}\nЧастота: {proc.ClockSpeed}\nЯдер: {proc.Cores} \nКол-во потоков: {proc.Threads} \nРегион продажи: {proc.region}\nЦена: {proc.Price}\nСтатус:{proc.GetDeliveryStatusString()}";
+                        break;
+                    case (ComponentType.Computer):
+                        Computer comp = i as Computer;
+                        info = comp.GetInfoString();
+                        break;
+                }
+                richTextBox1.AppendText(info + Environment.NewLine);
             }
         }
 

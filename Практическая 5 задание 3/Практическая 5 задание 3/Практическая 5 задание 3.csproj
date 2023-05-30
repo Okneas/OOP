@@ -87,6 +87,24 @@
     <Compile Include="Продажа компонента.Designer.cs">
       <DependentUpon>Продажа компонента.cs</DependentUpon>
     </Compile>
+    <Compile Include="Продажа компьютера.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Продажа компьютера.Designer.cs">
+      <DependentUpon>Продажа компьютера.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Создание компьютера.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Создание компьютера.Designer.cs">
+      <DependentUpon>Создание компьютера.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Список компьютеров.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Список компьютеров.Designer.cs">
+      <DependentUpon>Список компьютеров.cs</DependentUpon>
+    </Compile>
     <Compile Include="Чеки.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -116,6 +134,15 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Продажа компонента.resx">
       <DependentUpon>Продажа компонента.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Продажа компьютера.resx">
+      <DependentUpon>Продажа компьютера.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Создание компьютера.resx">
+      <DependentUpon>Создание компьютера.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Список компьютеров.resx">
+      <DependentUpon>Список компьютеров.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Чеки.resx">
       <DependentUpon>Чеки.cs</DependentUpon>

@@ -23,9 +23,9 @@ namespace Практическая_5_задание_3
         }
         public void SetInfoAllComponents()
         {
-            List<Component> alldel = new List<Component>();
+            List<Product> alldel = new List<Product>();
             alldel = Form1.shop.GetAllDeliveries();
-            foreach (Component i in alldel)
+            foreach (Product i in alldel)
             {
                 string info = "";
                 switch (i.Type)
@@ -46,6 +46,10 @@ namespace Практическая_5_задание_3
                         Processor proc = i as Processor;
                         info = $"Тип товара: Процессор\nНазвание: {proc.Name} \nПроизводитель: {proc.Manufacturer}\nЧастота: {proc.ClockSpeed}\nЯдер: {proc.Cores} \nКол-во потоков: {proc.Threads} \nРегион продажи: {proc.region}\nЦена: {proc.Price}\nВремя до прибытия доставки: {Math.Ceiling(proc.dtDelivery.Hours / 24M)}д {proc.dtDelivery.Hours % 24}:{proc.dtDelivery.Minutes}:{proc.dtDelivery.Seconds}";
                         break;
+                    case (ComponentType.Computer):
+                        Computer comp = i as Computer;
+                        info = $"{comp.GetInfoString()}Время до прибытия доставки: {Math.Ceiling(comp.dtDelivery.Hours / 24M)}д {comp.dtDelivery.Hours % 24}:{comp.dtDelivery.Minutes}:{comp.dtDelivery.Seconds}";
+                        break;
                 }
                 richTextBox1.AppendText(info + Environment.NewLine);
             }
@@ -60,7 +64,7 @@ namespace Практическая_5_задание_3
         private void Timer1_Tick(object sender, EventArgs e)
         {
             richTextBox1.Clear();
-            foreach(Component i in Form1.shop.AllDeliveries)
+            foreach(Product i in Form1.shop.AllDeliveries)
             {
                 i.dtDelivery -= TimeSpan.FromSeconds(1);
                 if(i.dtDelivery.TotalSeconds < 0)

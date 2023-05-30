@@ -10,8 +10,9 @@ namespace Практическая_5_задание_3
     {
         public void UpdateDeliveries()
         {
-            List<Component> list = Form1.shop.GetAllComponents();
-            foreach (Component i in list)
+            List<Product> list = Form1.shop.GetAllComponents();
+            List<Computer> list2 = Form1.shop.GetAllComputers();
+            foreach (Product i in list)
             {
                 if (!Form1.shop.AllDeliveries.Contains(i) && i.dl == DeliveryStatus.InTransit)
                 {
@@ -24,11 +25,28 @@ namespace Практическая_5_задание_3
                     break;
                 }
             }
+            foreach (Computer i in list2)
+            {
+                if (!Form1.shop.AllDeliveries.Contains(i) && i.dl == DeliveryStatus.InTransit)
+                {
+                    Form1.shop.AllDeliveries.Append(i);
+                    break;
+                }
+                if (i.dl == DeliveryStatus.Delivered)
+                {
+                    Delete(i);
+                    break;
+                }
+            }
         }
-        public void Delete(Component comp)
+        public void Delete(Product comp)
         {
             Form1.shop.AllComponents.Remove(comp);
             Form1.shop.AllDeliveries.Remove(comp);
+            if(comp.Type == ComponentType.Computer)
+            {
+                Form1.shop.AllComputers.Remove(comp as Computer);
+            }
         }
     }
 }

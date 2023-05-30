@@ -9,20 +9,22 @@ namespace Практическая_5_задание_3
    
     public interface IShop
     {
-        List<Component> AllComponents { get; set; }
-        List<Component> AllDeliveries { get; set; }
+        List<Product> AllComponents { get; set; }
+        List<Product> AllDeliveries { get; set; }
         List<Computer> AllComputers { get; set; }
-        List<string> AllChecks { get; set; }
+        List<Product> AllSolds { get; set; }
         string Name { get; set; }
         string Address { get; set; }
 
-        void AddComponent(Component component);
-        void CreateComputer(string name, Processor processor, VideoCard videoCard, Cooler cooler, Motherboard motherboard);
+        void AddComponent(Product component);
+        void CreateComputer(Computer comp);
         void SellComponent(ComponentType componentType, string name, DateTime DateOfDelivery);
         void SellComputer(string name);
-        List<Component> GetAllComponents();
+        List<Product> GetAllComponents();
         List<Computer> GetAllComputers();
-        List<string> GetAllChecks();
-        List<Component> GetAllDeliveries();
+        List<Product> GetAllSoldComponents();
+        List<Product> GetAllDeliveries();
+        Product FindByName(string name, ComponentType type);
+        List<Product> FindAllByType(ComponentType type);
     }
 }

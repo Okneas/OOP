@@ -73,6 +73,7 @@
             this.button2.TabIndex = 2;
             this.button2.Text = "Добавить компьютер";
             this.button2.UseVisualStyleBackColor = true;
+            this.button2.Click += new System.EventHandler(this.Button2_Click);
             // 
             // button3
             // 
@@ -102,6 +103,7 @@
             this.button5.TabIndex = 5;
             this.button5.Text = "Информация обо всех доступных компьютерах";
             this.button5.UseVisualStyleBackColor = true;
+            this.button5.Click += new System.EventHandler(this.Button5_Click);
             // 
             // button6
             // 
@@ -121,6 +123,7 @@
             this.button7.TabIndex = 7;
             this.button7.Text = "Продать компьютер";
             this.button7.UseVisualStyleBackColor = true;
+            this.button7.Click += new System.EventHandler(this.Button7_Click);
             // 
             // button8
             // 

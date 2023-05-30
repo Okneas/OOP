@@ -12,6 +12,9 @@ namespace Практическая_5_задание_3
 {
     public partial class Form1 : Form
     {
+        Продажа_компьютера f9;
+        Список_компьютеров f8;
+        Создание_компьютера f7;
         Доставки f6;
         Добавление_компонента f2;
         Информация_об_компонентах f3;
@@ -65,7 +68,7 @@ namespace Практическая_5_задание_3
             DisplayLastSale(e.Product);
         }
 
-        private void DisplayLastSale(Component component)
+        private void DisplayLastSale(Product component)
         {
             // обновляем метку на форме с информацией о последней продаже
             string saleMessage = $"Продан компонент: {component.Name}\nТип:{component.GetTypeString()}\nцена: {component.Price}";
@@ -87,9 +90,28 @@ namespace Практическая_5_задание_3
         {
             timer1.Start();
         }
+
+        private void Button2_Click(object sender, EventArgs e)
+        {
+            f7 = new Создание_компьютера();
+            f7.Show();
+        }
+
+        private void Button5_Click(object sender, EventArgs e)
+        {
+            f8 = new Список_компьютеров();
+            f8.Show();
+        }
+
+        private void Button7_Click(object sender, EventArgs e)
+        {
+
+            f9 = new Продажа_компьютера();
+            f9.Show();
+        }
     }
 
-    public class Processor : Component, IProcessor
+    public class Processor : Product, IProcessor
     {
         public int Cores { get; set; }
         public int Threads { get; set; }
@@ -104,7 +126,7 @@ namespace Практическая_5_задание_3
         }
     }
 
-    public class VideoCard : Component, IVideoCard
+    public class VideoCard : Product, IVideoCard
     {
         public int VRAM { get; set; }
         public decimal ClockSpeed { get; set; }
@@ -116,7 +138,7 @@ namespace Практическая_5_задание_3
         }
     }
 
-    public class Cooler : Component, ICooler
+    public class Cooler : Product, ICooler
     {
         public decimal FanSpeed { get; set; }
         public Cooler(decimal FS)
@@ -126,7 +148,7 @@ namespace Практическая_5_задание_3
         }
     }
 
-    public class Motherboard : Component, IMotherboard
+    public class Motherboard : Product, IMotherboard
     {
         public string Chipset { get; set; }
         public int RAMSlots { get; set; }
@@ -137,30 +159,34 @@ namespace Практическая_5_задание_3
             RAMSlots = RAMS;
         }
     }
-    public class Computer : IComputer
+    public class Computer : Product,  IComputer
     {
-        public string Name { get; set; }
-        public decimal Price { get; set; }
         public Processor Processor { get; set; }
         public VideoCard VideoCard { get; set; }
         public Cooler Cooler { get; set; }
         public Motherboard Motherboard { get; set; }
-        public Computer(string name, Processor processor, VideoCard videoCard, Cooler cooler, Motherboard motherboard)
+        public Computer( Processor processor, VideoCard videoCard, Cooler cooler, Motherboard motherboard)
         {
-            Name = name;
+            Type = ComponentType.Computer;
             Processor = processor;
             VideoCard = videoCard;
             Cooler = cooler;
             Motherboard = motherboard;
-
-            Price = Processor.Price + VideoCard.Price + Cooler.Price + Motherboard.Price;
+        }
+        public string GetAllComponentsName()
+        {
+            return $"Материнская плата: {this.Motherboard.Name}\nВидеокарта: {this.VideoCard.Name}\nПроцессор: {this.Processor.Name}\nКулер: {this.Cooler.Name}\n";
+        }
+        public string GetInfoString()
+        {
+            return $"Название: {Name}\nЦена: {Price}\n{this.GetAllComponentsName()}Регион продажи: {this.region}\nСтатус: {this.GetDeliveryStatusString()}\n";
         }
     }
     public class ComponentEventArgs : EventArgs
     {
-        public readonly Component Product;
+        public readonly Product Product;
 
-        public ComponentEventArgs(Component product)
+        public ComponentEventArgs(Product product)
         {
             Product = product;
         }
@@ -170,26 +196,25 @@ namespace Практическая_5_задание_3
         public event EventHandler<ComponentEventArgs> ComponentSold;
         public Shop(string name, string address)
         {
-            AllDeliveries = new List<Component>();
-            AllComponents = new List<Component>();
+            AllDeliveries = new List<Product>();
+            AllComponents = new List<Product>();
             AllComputers = new List<Computer>();
-            AllChecks = new List<string>();
+            AllSolds = new List<Product>();
             Name = name;
             Address = address;
         }
-        public List<Component> AllComponents { get; set; }
-        public List<Component> AllDeliveries { get; set; }
+        public List<Product> AllComponents { get; set; }
+        public List<Product> AllDeliveries { get; set; }
         public List<Computer> AllComputers { get; set; }
-        public List<string> AllChecks { get; set; }
+        public List<Product> AllSolds { get; set; }
         public string Name { get; set; }
         public string Address { get; set; }
-        public void AddComponent(Component component)
+        public void AddComponent(Product component)
         {
             AllComponents.Add(component);
         }
-        public void CreateComputer(string name, Processor processor, VideoCard videoCard, Cooler cooler, Motherboard motherboard)
+        public void CreateComputer(Computer comp)
         {
-            Computer comp = new Computer(name, processor, videoCard, cooler, motherboard);
             AllComputers.Add(comp);
         }
         protected virtual void OnProductSold(ComponentEventArgs e)
@@ -199,36 +224,38 @@ namespace Практическая_5_задание_3
         public void SellComponent(ComponentType componentType, string name, DateTime DateOfDelivery)
         {
             bool find = false;
-            foreach(Component i in AllComponents)
+            if (componentType == ComponentType.Computer)
             {
-                if(i.Name == name && i.Type == componentType)
+                foreach (Computer i in AllComputers)
                 {
-                    find = true;
-                    DateTime dt = DateTime.Now;
-                    switch (i.Type)
+                    if (i.Name == name)
                     {
-                        case (ComponentType.Cooler):
-                            Cooler cooler = i as Cooler;
-                            AllChecks.Add($"Продано {dt}\nТип товара: Кулер\nНазвание: {cooler.Name} \nПроизводитель: {cooler.Manufacturer}\nСкорость винтов: {cooler.FanSpeed}\nРегион продажи: {cooler.region}\nЦена: {cooler.Price}\nСтатус: {cooler.GetDeliveryStatusString()}");
-                            break;
-                        case (ComponentType.Motherboard):
-                            Motherboard motherboard = i as Motherboard;
-                            AllChecks.Add($"Продано {dt}\nТип товара: Кулер\nНазвание: {motherboard.Name} \nПроизводитель: {motherboard.Manufacturer}\nЧипсет: {motherboard.Chipset}\nКол-во RAM-слотов: {motherboard.RAMSlots} \nРегион продажи: {motherboard.region}\nЦена: {motherboard.Price}\nСтатус: {motherboard.GetDeliveryStatusString()}");
-                            break;
-                        case (ComponentType.VideoCard):
-                            VideoCard videoCard = i as VideoCard;
-                            AllChecks.Add($"Продано {dt}\nТип товара: Кулер\nНазвание: {videoCard.Name} \nПроизводитель: {videoCard.Manufacturer}\nЧастота: {videoCard.ClockSpeed}\nVRAM: {videoCard.VRAM} \nРегион продажи: {videoCard.region}\nЦена: {videoCard.Price}\nСтатус: {videoCard.GetDeliveryStatusString()}");
-                            break;
-                        case (ComponentType.Processor):
-                            Processor proc = i as Processor;
-                            AllChecks.Add($"Продано {dt} \nТип товара: Кулер\nНазвание: {proc.Name} \nПроизводитель: {proc.Manufacturer}\nЧастота: {proc.ClockSpeed}\nЯдер: {proc.Cores} \nКол-во потоков: {proc.Threads} \nРегион продажи: {proc.region}\nЦена: {proc.Price}\nСтатус: {proc.GetDeliveryStatusString()}");
-                            break;
+                        find = true;
+                        DateTime dt = DateTime.Now;
+                        OnProductSold(new ComponentEventArgs(i));
+                        i.SetDateOfDelivery(DateOfDelivery - dt);
+                        i.dl = DeliveryStatus.InTransit;
+                        AllSolds.Add(i);
+                        AllDeliveries.Add(i);
+                        break;
                     }
-                    OnProductSold(new ComponentEventArgs(i));
-                    i.SetDateOfDelivery(DateOfDelivery - dt);
-                    i.dl = DeliveryStatus.InTransit;
-                    AllDeliveries.Add(i);
-                    break;
+                }
+            }
+            else
+            {
+                foreach (Product i in AllComponents)
+                {
+                    if (i.Name == name && i.Type == componentType)
+                    {
+                        find = true;
+                        DateTime dt = DateTime.Now;
+                        OnProductSold(new ComponentEventArgs(i));
+                        i.SetDateOfDelivery(DateOfDelivery - dt);
+                        i.dl = DeliveryStatus.InTransit;
+                        AllSolds.Add(i);
+                        AllDeliveries.Add(i);
+                        break;
+                    }
                 }
             }
             if (!find)
@@ -243,12 +270,12 @@ namespace Практическая_5_задание_3
                 if(i.Name == name)
                 {
                     DateTime dt = new DateTime();
-                    AllChecks.Append($"Продано {dt.Date} в {dt.Hour}:{dt.Minute} \nТип товара: Компьютер \nНазвание: {i.Name} \nПроцессор: {i.Processor.Name} \nВидеокарта: {i.VideoCard.Name} \nКулер: {i.Cooler.Name} \nМатеринская плата: {i.Motherboard.Name} \nЦена: {i.Price} \n");
+                    //AllChecks.Append($"Продано {dt.Date} в {dt.Hour}:{dt.Minute} \nТип товара: Компьютер \nНазвание: {i.Name} \nПроцессор: {i.Processor.Name} \nВидеокарта: {i.VideoCard.Name} \nКулер: {i.Cooler.Name} \nМатеринская плата: {i.Motherboard.Name} \nЦена: {i.Price} \n");
                     break;
                 }
             }
         }
-        public List<Component> GetAllComponents()
+        public List<Product> GetAllComponents()
         {
             return AllComponents;
         }
@@ -256,13 +283,37 @@ namespace Практическая_5_задание_3
         {
             return AllComputers;
         }
-        public List<string> GetAllChecks()
+        public List<Product> GetAllSoldComponents()
         {
-            return AllChecks;
+            return AllSolds;
         }
-        public List<Component> GetAllDeliveries()
+        public List<Product> GetAllDeliveries()
         {
             return AllDeliveries;
+        }
+        public Product FindByName(string name, ComponentType type)
+        {
+            foreach(Product i in Form1.shop.GetAllComponents())
+            {
+                if(i.Name == name && i.Type == type)
+                {
+                    return i;
+                }
+            }
+            return null;
+        }
+
+        public List<Product> FindAllByType(ComponentType type)
+        {
+            List<Product> allByType = new List<Product>();
+            foreach(Product i in Form1.shop.GetAllComponents())
+            {
+                if(i.Type == type)
+                {
+                    allByType.Add(i);
+                }
+            }
+            return allByType;
         }
     }
 }

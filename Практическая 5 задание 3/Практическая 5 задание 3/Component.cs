@@ -17,9 +17,10 @@ namespace Практическая_5_задание_3
         Processor,
         VideoCard,
         Cooler,
-        Motherboard
+        Motherboard,
+        Computer
     }
-    public abstract class Component
+    public abstract class Product
     {
         public TimeSpan dtDelivery; 
         public DeliveryStatus dl = DeliveryStatus.OnStorage;
@@ -42,8 +43,8 @@ namespace Практическая_5_задание_3
             }
             this.discount = dis;
             this.Name = name;
-            this.Manufacturer = man;
             this.Price = price;
+            this.Manufacturer = man;
         }
         public void SetDateOfDelivery(TimeSpan dt)
         {
@@ -61,6 +62,8 @@ namespace Практическая_5_задание_3
                     return "Processor";
                 case (ComponentType.VideoCard):
                     return "VideoCard";
+                case (ComponentType.Computer):
+                    return "Computer";
             }
             return "";
         }

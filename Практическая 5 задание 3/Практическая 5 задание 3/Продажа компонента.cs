@@ -36,7 +36,7 @@ namespace Практическая_5_задание_3
             {
                 type = ComponentType.Cooler;
             }
-            Form1.shop.SellComponent(type, textBox1.Text, dateTimePicker1.Value);
+            Form1.shop.SellComponent(type, comboBox1.Text, dateTimePicker1.Value);
             Close();
         }
 
@@ -44,6 +44,66 @@ namespace Практическая_5_задание_3
         {
             dateTimePicker1.Format = DateTimePickerFormat.Custom;
             dateTimePicker1.CustomFormat = "MM/dd/yyyy hh:mm:ss";
+        }
+
+        private void RadioButton1_CheckedChanged(object sender, EventArgs e)
+        {
+            if (radioButton1.Checked)
+            {
+                foreach (Product i in Form1.shop.FindAllByType(ComponentType.VideoCard))
+                {
+                    comboBox1.Items.Add(i.Name);
+                }
+            }
+            else
+            {
+                comboBox1.Items.Clear();
+            }
+        }
+
+        private void RadioButton2_CheckedChanged(object sender, EventArgs e)
+        {
+            if (radioButton1.Checked)
+            {
+                foreach (Product i in Form1.shop.FindAllByType(ComponentType.Processor))
+                {
+                    comboBox1.Items.Add(i.Name);
+                }
+            }
+            else
+            {
+                comboBox1.Items.Clear();
+            }
+        }
+
+        private void RadioButton3_CheckedChanged(object sender, EventArgs e)
+        {
+            if (radioButton1.Checked)
+            {
+                foreach (Product i in Form1.shop.FindAllByType(ComponentType.Motherboard))
+                {
+                    comboBox1.Items.Add(i.Name);
+                }
+            }
+            else
+            {
+                comboBox1.Items.Clear();
+            }
+        }
+
+        private void RadioButton4_CheckedChanged(object sender, EventArgs e)
+        {
+            if (radioButton1.Checked)
+            {
+                foreach (Product i in Form1.shop.FindAllByType(ComponentType.Cooler))
+                {
+                    comboBox1.Items.Add(i.Name);
+                }
+            }
+            else
+            {
+                comboBox1.Items.Clear();
+            }
         }
     }
 }
